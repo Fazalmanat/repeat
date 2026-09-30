@@ -1,0 +1,1156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Endless Manuscript</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+
+/* =========================================================
+   EVERYTHING
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #241b16 0%,
+            #0d0907 55%,
+            #030202 100%
+        );
+
+    color: #b9ad98;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* =========================================================
+   BACKGROUND VOID
+   ========================================================= */
+
+#void {
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   IMPERFECT HYPNOTIC CIRCLE
+   ========================================================= */
+
+.hypno {
+    position: absolute;
+
+    width: 900px;
+    height: 900px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-8deg);
+
+    opacity: .18;
+
+    animation:
+        hypnoticDrift 18s ease-in-out infinite alternate;
+}
+
+
+/* circles deliberately aren't perfectly circular */
+
+.ring {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border:
+        1px solid rgba(170, 145, 105, .42);
+
+    border-radius:
+        47% 53% 49% 51%
+        /
+        52% 46% 54% 48%;
+}
+
+
+.ring1 {
+    width: 94%;
+    height: 87%;
+
+    animation:
+        ringRotate1 23s linear infinite;
+}
+
+
+.ring2 {
+    width: 78%;
+    height: 83%;
+
+    border-radius:
+        53% 47% 55% 45%
+        /
+        44% 58% 42% 56%;
+
+    animation:
+        ringRotate2 17s linear infinite reverse;
+}
+
+
+.ring3 {
+    width: 62%;
+    height: 68%;
+
+    border-style: dashed;
+
+    animation:
+        ringRotate1 11s linear infinite;
+}
+
+
+.ring4 {
+    width: 41%;
+    height: 46%;
+
+    border-width: 2px;
+
+    animation:
+        ringPulse 5s ease-in-out infinite alternate;
+}
+
+
+@keyframes hypnoticDrift {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            rotate(-12deg)
+            scale(1, .92);
+    }
+
+    25% {
+        transform:
+            translate(-48%, -52%)
+            rotate(7deg)
+            scale(.93, 1.04);
+    }
+
+    50% {
+        transform:
+            translate(-52%, -49%)
+            rotate(16deg)
+            scale(1.06, .91);
+    }
+
+    75% {
+        transform:
+            translate(-49%, -51%)
+            rotate(-3deg)
+            scale(.96, 1.08);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            rotate(-14deg)
+            scale(1.04, .94);
+    }
+}
+
+
+@keyframes ringRotate1 {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+}
+
+
+@keyframes ringRotate2 {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg)
+            scale(1, 1);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(-360deg)
+            scale(.96, 1.04);
+    }
+}
+
+
+@keyframes ringPulse {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(-7deg)
+            scale(.87, 1.08);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(11deg)
+            scale(1.08, .91);
+    }
+}
+
+
+/* =========================================================
+   OCCULT MARKS
+   ========================================================= */
+
+.background-symbol {
+    position: absolute;
+
+    color: rgba(160, 137, 104, .32);
+
+    font-size: 30px;
+
+    animation:
+        symbolDrift 6s ease-in-out infinite alternate;
+}
+
+
+.bs1 {
+    left: 8%;
+    top: 24%;
+}
+
+.bs2 {
+    right: 12%;
+    top: 18%;
+    animation-delay: -2s;
+}
+
+.bs3 {
+    left: 18%;
+    bottom: 17%;
+    animation-delay: -4s;
+}
+
+.bs4 {
+    right: 18%;
+    bottom: 12%;
+    animation-delay: -1s;
+}
+
+.bs5 {
+    left: 49%;
+    top: 6%;
+    animation-delay: -3s;
+}
+
+
+@keyframes symbolDrift {
+
+    from {
+        transform:
+            rotate(-15deg)
+            translate(-5px, 4px);
+    }
+
+    to {
+        transform:
+            rotate(18deg)
+            translate(7px, -6px);
+    }
+}
+
+
+/* =========================================================
+   MANUSCRIPT
+   ========================================================= */
+
+#manuscript {
+
+    position: absolute;
+
+    z-index: 10;
+
+    width: min(650px, calc(100vw - 30px));
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-.7deg);
+
+    padding:
+        clamp(35px, 7vw, 65px)
+        clamp(25px, 7vw, 60px);
+
+    background:
+        linear-gradient(
+            93deg,
+            #241a14,
+            #30231a 47%,
+            #211711
+        );
+
+    /*
+       Not a clean rectangle.
+    */
+
+    border-radius:
+        2px 7px 3px 5px
+        /
+        5px 2px 6px 3px;
+
+    border-top:
+        2px solid rgba(154, 128, 91, .45);
+
+    border-left:
+        1px solid rgba(154, 128, 91, .35);
+
+    border-right:
+        2px solid rgba(154, 128, 91, .28);
+
+    border-bottom:
+        1px solid rgba(154, 128, 91, .45);
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,.9),
+        inset 0 0 45px rgba(0,0,0,.45);
+
+    /*
+       The manuscript itself moves slightly.
+    */
+
+    animation:
+        manuscriptWobble 8s ease-in-out infinite alternate;
+}
+
+
+/* crooked secondary border */
+
+#manuscript::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 13px;
+
+    border:
+        1px solid rgba(142, 117, 82, .25);
+
+    transform:
+        rotate(.9deg)
+        skewX(-1.5deg)
+        scale(1.01, .98);
+
+    pointer-events: none;
+}
+
+
+/* another badly drawn border */
+
+#manuscript::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -7px;
+
+    border:
+        1px solid rgba(120, 96, 67, .14);
+
+    transform:
+        rotate(-1.7deg)
+        skewY(.8deg);
+
+    pointer-events: none;
+}
+
+
+@keyframes manuscriptWobble {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(-1deg)
+            skewX(-.15deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(.8deg)
+            skewX(.25deg);
+    }
+}
+
+
+/* =========================================================
+   MESSY HANDWRITING
+   ========================================================= */
+
+.handwriting {
+
+    position: relative;
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        "Comic Sans MS",
+        cursive;
+
+    color: #b9ab92;
+
+    text-align: left;
+
+    line-height: 1.65;
+
+    text-shadow:
+        .6px .5px 0 rgba(0,0,0,.5);
+
+    /*
+       deliberately inconsistent
+    */
+
+    animation:
+        handwritingWobble 5s ease-in-out infinite alternate;
+}
+
+
+.title {
+
+    text-align: center;
+
+    font-size:
+        clamp(24px, 5vw, 40px);
+
+    letter-spacing:
+        .08em;
+
+    font-weight: normal;
+
+    transform:
+        rotate(-1.8deg)
+        skewX(-3deg);
+
+    margin-bottom: 35px;
+}
+
+
+.line1 {
+
+    font-size: 18px;
+
+    transform:
+        rotate(.8deg)
+        translateX(-5px);
+
+    margin-bottom: 25px;
+}
+
+
+.line2 {
+
+    font-size: 19px;
+
+    transform:
+        rotate(-1.4deg)
+        translateX(8px);
+
+    margin-bottom: 28px;
+}
+
+
+.line3 {
+
+    font-size: 17px;
+
+    transform:
+        rotate(1.7deg)
+        translateX(-3px);
+
+    margin-bottom: 28px;
+}
+
+
+.line4 {
+
+    font-size: 20px;
+
+    transform:
+        rotate(-.8deg)
+        translateX(11px);
+}
+
+
+@keyframes handwritingWobble {
+
+    from {
+        letter-spacing: .01em;
+    }
+
+    to {
+        letter-spacing: .035em;
+    }
+}
+
+
+/* =========================================================
+   SCRATCHES / HAND-DRAWN LINES
+   ========================================================= */
+
+.scratch {
+
+    height: 1px;
+
+    margin: 28px 0;
+
+    background:
+        rgba(150, 128, 96, .35);
+
+    transform-origin: left;
+
+    animation:
+        scratchWobble 4s ease-in-out infinite alternate;
+}
+
+
+.scratch1 {
+    width: 72%;
+    transform:
+        rotate(-1.4deg)
+        translateX(4%);
+}
+
+
+.scratch2 {
+    width: 91%;
+    transform:
+        rotate(1.7deg)
+        translateX(-3%);
+}
+
+
+.scratch3 {
+    width: 58%;
+    transform:
+        rotate(-.6deg)
+        translateX(22%);
+}
+
+
+@keyframes scratchWobble {
+
+    from {
+        transform:
+            rotate(-2deg)
+            scaleX(.96);
+    }
+
+    to {
+        transform:
+            rotate(1.5deg)
+            scaleX(1.03);
+    }
+}
+
+
+/* =========================================================
+   HANDWRITTEN OCCULT SYMBOLS
+   ========================================================= */
+
+.rune-row {
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    margin: 25px 0;
+
+    font-family: cursive;
+
+    font-size:
+        clamp(22px, 5vw, 34px);
+
+    color: #9d8b70;
+}
+
+
+.rune {
+
+    display: inline-block;
+
+    animation:
+        runeWobble 3s ease-in-out infinite alternate;
+}
+
+
+.rune:nth-child(2) {
+    transform: rotate(17deg);
+    animation-delay: -1s;
+}
+
+.rune:nth-child(3) {
+    transform: rotate(-13deg);
+    animation-delay: -2s;
+}
+
+.rune:nth-child(4) {
+    transform: rotate(23deg);
+    animation-delay: -1.5s;
+}
+
+
+@keyframes runeWobble {
+
+    from {
+        transform:
+            rotate(-12deg)
+            scale(.9, 1.1);
+    }
+
+    to {
+        transform:
+            rotate(14deg)
+            scale(1.08, .91);
+    }
+}
+
+
+/* =========================================================
+   RANDOM INK MARKS
+   ========================================================= */
+
+.ink {
+
+    position: absolute;
+
+    width: 20px;
+    height: 7px;
+
+    background:
+        rgba(10, 7, 5, .32);
+
+    border-radius:
+        50% 30% 60% 40%;
+
+    filter: blur(.6px);
+
+    transform:
+        rotate(var(--r));
+}
+
+
+.ink1 {
+    left: 8%;
+    top: 17%;
+    --r: -17deg;
+}
+
+.ink2 {
+    right: 13%;
+    top: 30%;
+    --r: 24deg;
+}
+
+.ink3 {
+    left: 16%;
+    bottom: 22%;
+    --r: 8deg;
+}
+
+.ink4 {
+    right: 8%;
+    bottom: 13%;
+    --r: -29deg;
+}
+
+
+/* =========================================================
+   RECURSIVE IMAGES
+   ========================================================= */
+
+.recursive {
+
+    position: fixed;
+
+    /*
+       IMPORTANT:
+       These are NOT positioned relative to the manuscript.
+       They belong to the entire browser window.
+    */
+
+    left: 0;
+    top: 0;
+
+    width:
+        min(620px, 70vw);
+
+    height: auto;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    opacity: .88;
+
+    border:
+        1px solid rgba(160, 135, 100, .35);
+
+    box-shadow:
+        0 0 25px rgba(0,0,0,.85);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(var(--rotation));
+
+    transform-origin:
+        center center;
+
+    animation:
+        recursiveWobble var(--speed) ease-in-out infinite alternate;
+}
+
+
+@keyframes recursiveWobble {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--rotation))
+            skewX(-.7deg)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(calc(var(--rotation) + 3deg))
+            skewX(.8deg)
+            scale(1.015);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .hypno {
+
+        width: 125vw;
+        height: 125vw;
+
+        opacity: .15;
+    }
+
+
+    #manuscript {
+
+        width:
+            calc(100vw - 18px);
+
+        padding:
+            38px 22px;
+    }
+
+
+    .recursive {
+
+        width:
+            72vw;
+    }
+
+
+    .handwriting {
+
+        line-height: 1.55;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     BACKGROUND
+     ======================================================= -->
+
+<div id="void">
+
+    <div class="hypno">
+
+        <div class="ring ring1"></div>
+        <div class="ring ring2"></div>
+        <div class="ring ring3"></div>
+        <div class="ring ring4"></div>
+
+    </div>
+
+
+    <div class="background-symbol bs1">☽</div>
+    <div class="background-symbol bs2">†</div>
+    <div class="background-symbol bs3">☩</div>
+    <div class="background-symbol bs4">◈</div>
+    <div class="background-symbol bs5">◇</div>
+
+</div>
+
+
+<!-- =======================================================
+     THE ORIGINAL MANUSCRIPT
+     ======================================================= -->
+
+<div id="manuscript">
+
+    <div class="ink ink1"></div>
+    <div class="ink ink2"></div>
+    <div class="ink ink3"></div>
+    <div class="ink ink4"></div>
+
+
+    <div class="handwriting title">
+        THE ENDLESS MANUSCRIPT
+    </div>
+
+
+    <div class="rune-row">
+
+        <span class="rune">☾</span>
+        <span class="rune">†</span>
+        <span class="rune">☽</span>
+        <span class="rune">◇</span>
+
+    </div>
+
+
+    <div class="scratch scratch1"></div>
+
+
+    <div class="handwriting line1">
+
+        You have opened a page<br>
+        that should not have been opened.
+
+    </div>
+
+
+    <div class="scratch scratch2"></div>
+
+
+    <div class="handwriting line2">
+
+        Every time this manuscript<br>
+        looks upon itself,<br>
+        another fragment appears.
+
+    </div>
+
+
+    <div class="rune-row">
+
+        <span class="rune">✦</span>
+        <span class="rune">☩</span>
+        <span class="rune">✦</span>
+
+    </div>
+
+
+    <div class="scratch scratch3"></div>
+
+
+    <div class="handwriting line3">
+
+        There is no first page.
+
+    </div>
+
+
+    <div class="handwriting line4">
+
+        There is no final page.
+
+    </div>
+
+
+    <div class="rune-row">
+
+        <span class="rune">◈</span>
+        <span class="rune">◇</span>
+        <span class="rune">◈</span>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   RANDOM HELPERS
+   ========================================================= */
+
+function random(min, max) {
+
+    return Math.random() * (max - min) + min;
+}
+
+
+/* =========================================================
+   RANDOM WINDOW POSITION
+   ========================================================= */
+
+function placeRandomly(image) {
+
+    /*
+       The entire viewport is the playing field.
+
+       No manuscript.
+       No div.
+       No directional pattern.
+       No "preferred" side.
+    */
+
+    const x =
+        random(0, window.innerWidth);
+
+    const y =
+        random(0, window.innerHeight);
+
+
+    const rotation =
+        random(-180, 180);
+
+
+    image.style.left =
+        `${x}px`;
+
+    image.style.top =
+        `${y}px`;
+
+
+    image.style.setProperty(
+        "--rotation",
+        `${rotation}deg`
+    );
+
+
+    image.style.setProperty(
+        "--speed",
+        `${random(2, 7)}s`
+    );
+}
+
+
+/* =========================================================
+   RECURSION
+   ========================================================= */
+
+let generation = 0;
+
+
+async function recurse() {
+
+    await new Promise(resolve => {
+
+        setTimeout(
+            resolve,
+            random(700, 1800)
+        );
+
+    });
+
+
+    generation++;
+
+
+    /*
+       Capture the ENTIRE visible window.
+
+       Therefore:
+
+       page
+          ↓
+       screenshot
+          ↓
+       screenshot becomes part of window
+          ↓
+       screenshot of screenshot
+          ↓
+       screenshot of screenshot of screenshot
+          ↓
+       etc.
+    */
+
+    const canvas =
+        await html2canvas(
+            document.body,
+            {
+
+                backgroundColor:
+                    "#080605",
+
+                width:
+                    window.innerWidth,
+
+                height:
+                    window.innerHeight,
+
+                windowWidth:
+                    window.innerWidth,
+
+                windowHeight:
+                    window.innerHeight,
+
+                x: 0,
+
+                y: 0,
+
+                scale:
+                    window.innerWidth < 700
+                        ? .48
+                        : .55,
+
+                useCORS:
+                    true,
+
+                logging:
+                    false
+
+            }
+        );
+
+
+    const image =
+        document.createElement("img");
+
+
+    image.className =
+        "recursive";
+
+
+    image.src =
+        canvas.toDataURL(
+            "image/jpeg",
+            .82
+        );
+
+
+    /*
+       IMPORTANT:
+
+       Append to BODY, not manuscript.
+
+       This means the screenshot can appear
+       absolutely anywhere on the screen.
+    */
+
+    document.body.appendChild(image);
+
+
+    placeRandomly(image);
+
+
+    /*
+       Never shrink it.
+
+       Every generation keeps the same
+       approximate physical size.
+    */
+
+
+    /*
+       Occasionally create an extra copy.
+
+       This makes the recursion stop behaving
+       like a predictable one-at-a-time machine.
+    */
+
+    if (
+        generation > 5 &&
+        Math.random() < .16
+    ) {
+
+        setTimeout(
+            recurse,
+            random(100, 500)
+        );
+    }
+
+
+    /*
+       Continue forever.
+    */
+
+    recurse();
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+setTimeout(
+    recurse,
+    1500
+);
+
+</script>
+
+</body>
+</html>
+```
